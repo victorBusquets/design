@@ -1,2 +1,3 @@
 npm-debug.**
-libs
+public_html/libs
+node_modules

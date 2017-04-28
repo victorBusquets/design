@@ -1,0 +1,17 @@
+{
+	"name": "Front",
+	"version": "1.0.0",
+	"description": "Only launch front app - Server",
+	"author": "Victor Busquets Boro",
+	"license": "ISC",
+	"dependencies": {
+		"path": "^0.12.7",
+		"express": "^4.13.4",
+		"nodemon": "^1.10.0",
+		"bower": "^1.7.9"
+	},
+	"scripts": {
+		"postinstall": "node_modules/.bin/bower install",
+		"start": "nodemon server"
+	}
+}
