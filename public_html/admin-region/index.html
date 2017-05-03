@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="design">
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Project for designs">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="favicon.png">
+		<title>Designs</title>
+		<link rel="stylesheet" href="./../libs/font-awesome/css/font-awesome.css"/>
+		<link rel="stylesheet" href="./styles.css"/>
+	</head>
+	<body class="admin-area">
+		<header class="header">
+		</header>
+		<div class="content">
+			<div class="actions" ui-view="content"></div>
+		</div>
+		
+		<!-- Vendors libraries -->
+		<script type="text/javascript" src="./../libs/jquery/dist/jquery.js"></script>
+		<script type="text/javascript" src="./../libs/angular/angular.js"></script>
+		<script type="text/javascript" src="./../libs/angular-ui-router/release/angular-ui-router.js"></script>
+
+		<!-- Angular files-->
+		<script type="text/javascript" src="./app.js"></script>
+		
+		<script type="text/javascript" src="./modules/main/main.controller.js"></script>
+		<script type="text/javascript" src="./modules/main/main.route.js"></script>
+		<script type="text/javascript" src="./modules/main/main.module.js"></script>
+		
+		<script type="text/javascript" src="./modules/products/products.controller.js"></script>
+		<script type="text/javascript" src="./modules/products/products.route.js"></script>
+		<script type="text/javascript" src="./modules/products/products.module.js"></script>
+
+		<script type="text/javascript" src="./modules/modules.module.js"></script>		
+	</body>
+</html>

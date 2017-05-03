@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('design.modules', [
-		'design.modules.home',
-		'design.modules.api'
+		'design.modules.main',
+		'design.modules.products'
 	]);
 }());
