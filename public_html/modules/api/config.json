@@ -1,0 +1,32 @@
+{
+	"title":"Listado de puntos de api",
+	"description":"Listado de puntos de api, con descripcion funcional y ejemplo de JSON.",
+	"sections":[
+		{
+			"title":"Login",
+			"param":"login"
+		},
+		{
+			"title":"Registro",
+			"param":"register"
+		},
+		{
+			"title":"Productos",
+			"param":"products"
+		}
+	],
+	"subSections":[
+		{
+			"title":"Información",
+			"uiref":"api.info"
+		},
+		{
+			"title":"Funcionamiento",
+			"uiref":"api.functional"
+		},
+		{
+			"title":"Ejemplo JSON",
+			"uiref":"api.json"
+		}
+	]
+}

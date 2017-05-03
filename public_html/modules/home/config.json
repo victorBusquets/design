@@ -1,0 +1,10 @@
+{
+	"title":"Secciones de la documentación",
+	"description":"Listado de secciones de la documentación.",
+	"links":[
+		{
+			"title":"Api",
+			"uiref":"api"
+		}
+	]
+}

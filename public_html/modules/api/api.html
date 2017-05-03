@@ -1,0 +1,13 @@
+<h3 class="column-title">{{config.title}}</h3>
+<p class="column-description">{{config.description}}</p>
+<ul>
+	<li ng-repeat="section in config.sections">
+		<span>{{section.title}}</span>
+		<ul>
+			<li ng-repeat="subSection in config.subSections">
+				<a ui-sref="{{subSection.uiref}}({restPoint: section.param})">{{subSection.title}}</a>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="second-column" ui-view=""></div>

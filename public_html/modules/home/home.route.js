@@ -6,7 +6,7 @@
 								
 			$stateProvider        
 				.state('home', {
-					url: '/',
+					url: '/docs',
 					views: {
 						'content': {
 							templateUrl: 'modules/home/home.html',
@@ -15,7 +15,7 @@
 					}
 				});
 
-				$urlRouterProvider.otherwise('/');
+				$urlRouterProvider.otherwise('/docs');
 
 		});
 }());
