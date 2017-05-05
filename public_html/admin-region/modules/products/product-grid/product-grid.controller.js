@@ -1,10 +1,9 @@
 (function(){
     'use strict';
 
-    angular.module('design.modules.products.controller', [])
-        .controller("ProductsController", ["$scope", "$http", function( $scope, $http ) {
-			$scope.result = {
-				data:	[
+    angular.module('design.modules.products.product-grid.controller', [])
+        .controller("ProductGridController", ["$scope", "$http", "$stateParams", function( $scope, $http, $stateParams ) {
+			$scope.products = [
 					{
 						_id: 1,
 						name: 'Arroz',
@@ -164,59 +163,28 @@
 							name: 'Pescado'
 						}
 					}
-				],
-				info:{
-					totalResults: 12,
-					resultPerPage: 10,
-					currentPage: 1			
-				}
-			};
-		
-			/*Compontent*/
-			function getPages(currentPage, totalResults, resultPerPage){
-				var pages = Math.ceil( $scope.paginator.totalResults / $scope.paginator.resultPerPage ),
-					pageLimit = 11,
-					centerPageIndex = Math.ceil( pageLimit/2 ),
-					pagesList = Array.apply(null, {length: pages}).map(function( el, index ){ return index+1; });
-
-					if( currentPage-centerPageIndex >= 1 && currentPage+centerPageIndex <= pages){
-						console.log("Center");
-						pagesList = pagesList.slice(currentPage-centerPageIndex, currentPage+centerPageIndex-1);
-					}else{
-						if(currentPage-centerPageIndex >= 1){
-							pagesList = pagesList.slice(pagesList.length-pageLimit, pagesList.length);
-						}else{
-							pagesList = pagesList.slice(0, pageLimit);
-						}
-					}
-					
-					if( currentPage > centerPageIndex){
-						pagesList[0] = 1;
-						pagesList[1] = '...';
-					}
-					if( currentPage < pages-centerPageIndex+1 ){
-						pagesList[pagesList.length-2] = '...';
-						pagesList[pagesList.length-1] = pages;
-					}
-					
-				return pagesList;
-			};
-			/*Compontent*/
-		
-			$scope.getProducts = function(page){
-				if(page!='...'){
-
-					$scope.paginator = $scope.result.info;
-					$scope.paginator.currentPage = page;
-					$scope.paginator.pages = getPages( page, $scope.paginator.totalResults, $scope.paginator.resultPerPage );
-					$scope.paginator.finalPage = Math.ceil( $scope.paginator.totalResults / $scope.paginator.resultPerPage );	
-
-					$scope.products = $scope.result.data.slice( $scope.paginator.resultPerPage*(page-1), $scope.paginator.resultPerPage*page );	
-				}
-			};
-			
-			$scope.getProducts(1);
-		
+				];
+				var titles = {
+					'detail': 'Detalles de producto',
+					'new': 'Nuevo producto',
+					'delete': 'Confirme eliminación de producto',
+					'edit': 'Edicion datos de producto'
+				};
+				
+				$scope.getProductDetails = function(id){
+					$scope.product = $scope.products.filter(function(product){
+						return product._id == parseInt(id);
+					})[0];
+				};
+				
+				$scope.setMode = function(){
+					$scope.mode = $stateParams.action;
+					$scope.title = ( titles[$stateParams.action] || 'Nuevo' ) + ( ' '+$stateParams.id || '' );
+					$scope.editionDisabled = $scope.mode != 'edit' && $scope.mode != 'new';
+				};
+				
+				if($stateParams.id!=undefined)	$scope.getProductDetails( $stateParams.id );
+				$scope.setMode();
 		}]);
 		
 }());

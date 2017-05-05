@@ -12,8 +12,7 @@
 		<link rel="stylesheet" href="./styles.css"/>
 	</head>
 	<body class="admin-area">
-		<header class="header">
-		</header>
+		<header class="header" ui-view="header"></header>
 		<div class="content">
 			<div class="actions" ui-view="content"></div>
 		</div>
@@ -34,6 +33,17 @@
 		<script type="text/javascript" src="./modules/products/products.route.js"></script>
 		<script type="text/javascript" src="./modules/products/products.module.js"></script>
 
-		<script type="text/javascript" src="./modules/modules.module.js"></script>		
+		<script type="text/javascript" src="./modules/products/product-grid/product-grid.controller.js"></script>
+		<script type="text/javascript" src="./modules/products/product-grid/product-grid.route.js"></script>
+		<script type="text/javascript" src="./modules/products/product-grid/product-grid.module.js"></script>
+
+		<script type="text/javascript" src="./modules/header/header.controller.js"></script>
+		<script type="text/javascript" src="./modules/header/header.module.js"></script>
+		
+		<script type="text/javascript" src="./modules/modules.module.js"></script>	
+		
+		<script type="text/javascript" src="./filters/cut.filter.js"></script>		
+		<script type="text/javascript" src="./filters/filters.module.js"></script>		
+
 	</body>
 </html>

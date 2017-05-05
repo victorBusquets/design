@@ -11,7 +11,11 @@
 						'content': {
 							templateUrl: 'modules/main/main.html',
 							controller: 'MainController'
-						}
+						},
+						'header': {
+							templateUrl: 'modules/header/header.html',
+							controller: 'HeaderController'
+						},
 					}
 				});
 
