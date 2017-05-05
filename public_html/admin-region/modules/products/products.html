@@ -41,7 +41,7 @@
 							<i class="fa fa-trash-o"></i>
 						</a>
 					</td>
-					<td>{{product._id}}</td>
+					<td>{{product._id | cut: 3 }}</td>
 					<td>{{product.name | cut: 20 }}</td>
 					<td>{{product.description | cut: 20 }}</td> 
 					<td>{{product.energy}}</td> 
@@ -75,7 +75,6 @@
 		</div>
 	</div>
 	<!--Component-->
-	
 </div>
 <div class="column second-column" ui-view="">
 </div>
