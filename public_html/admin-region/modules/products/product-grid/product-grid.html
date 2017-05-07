@@ -11,23 +11,27 @@
 		</div>
 		<div class="input-holder">
 			<p>Aporte energetico (kcal)</p>
-			<input ng-disabled="editionDisabled" ng-model="product.energy"/>
+			<input ng-disabled="editionDisabled" type="number" ng-model="product.energy"/>
 		</div>
 		<div class="input-holder">
 			<p>Cantidad (gr)</p>
-			<input ng-disabled="editionDisabled" ng-model="product.quantity"/>
+			<input ng-disabled="editionDisabled" type="number" ng-model="product.quantity"/>
 		</div>
 		<div class="input-holder">
 			<p>Proteinas (100gr)</p>
-			<input ng-disabled="editionDisabled" ng-model="product.protein"/>
+			<input ng-disabled="editionDisabled" type="number" ng-model="product.protein"/>
 		</div>
 		<div class="input-holder">
 			<p>Grasas (100gr)</p>
-			<input ng-disabled="editionDisabled" ng-model="product.fats"/>
+			<input ng-disabled="editionDisabled" type="number" ng-model="product.fats"/>
 		</div>
 		<div class="input-holder">
 			<p>Carbohidratos (100gr)</p>
-			<input ng-disabled="editionDisabled" ng-model="product.carbohydrates"/>
+			<input ng-disabled="editionDisabled" type="number" ng-model="product.carbohydrates"/>
+		</div>
+		<div class="input-holder">
+			<p>Categoria</p>
+			<input ng-disabled="editionDisabled" ng-model="product.category.name"/>
 		</div>
 		<div class="buttons">
 			<button class="new button" ng-if="mode=='new'">
