@@ -18,3 +18,5 @@ Levantar node con mocks:
   -> node server onlyFront
   
  
+Enlaces de referencia:
+https://scalegrid.io/blog/fast-paging-with-mongodb/
