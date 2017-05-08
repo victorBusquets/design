@@ -7,7 +7,7 @@
 	},
 	"fields":[
 		{
-			"gridHidde": true,
+			"gridHidden": true,
 			"name": "_id",
 			"title": "#ID"
 		},

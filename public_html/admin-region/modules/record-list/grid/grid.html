@@ -1,9 +1,13 @@
 <div class="content">
-	<h3 class="{{mode}}">{{title}}</h3>
+	<h3 class="{{mode}}">
+		{{title}}
+	</h3>
+	
 	<div class="grid" ng-if="record">
-		<div ng-repeat="field in config.fields" class="input-holder">
+		<div ng-repeat="field in config.fields" ng-if="!field.gridHidden" class="input-holder">
 			<p>{{field.title}}</p>
-			<input ng-disabled="editionDisabled" ng-model-options="{ getterSetter: true }"  ng-model="getRowFieldValue(record, field)"/>
+			<input ng-if="field.subName" ng-disabled="editionDisabled" ng-model="record[field.name][field.subName]"/>
+			<input ng-if="!field.subName" ng-disabled="editionDisabled" ng-model="record[field.name]"/>
 		</div>
 		<div class="buttons">
 			<button class="new button" ng-if="mode=='new'">
