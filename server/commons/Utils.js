@@ -53,7 +53,7 @@
 		};
 		
 		this.tryMondoDBConnection = function(mongoose){
-			mongoose.connect('mongodb://localhost/domimob', function(error){
+			mongoose.connect('mongodb://localhost/design', function(error){
 				if(error){
 					console.log('  - Error de conexion con MongoDB');
 					console.log(error);
