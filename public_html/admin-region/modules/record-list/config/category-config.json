@@ -1,0 +1,18 @@
+{
+	"listTitle": "Listado de Categorias",
+	"itemTitle": "Categoria",
+	"initialPage": 1,
+	"endPoint": {
+		"list": "/api/category"
+	},
+	"fields":[
+		{
+			"name": "_id",
+			"title": "#ID"
+		},
+		{
+			"name": "name",
+			"title": "Nombre"
+		}
+	]
+}

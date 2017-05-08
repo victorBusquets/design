@@ -1,0 +1,26 @@
+<div class="content">
+	<h3 class="{{mode}}">{{title}}</h3>
+	<div class="grid" ng-if="record">
+		<div ng-repeat="field in config.fields" class="input-holder">
+			<p>{{field.title}}</p>
+			<input ng-disabled="editionDisabled" ng-model-options="{ getterSetter: true }"  ng-model="getRowFieldValue(record, field)"/>
+		</div>
+		<div class="buttons">
+			<button class="new button" ng-if="mode=='new'">
+				<i class="fa fa-plus"></i>
+				Crear
+			</button>
+			<button class="delete button" ng-if="mode=='delete'">
+				<i class="fa fa-trash-o"></i>
+				Eliminar
+			</button>
+			<button class="save button" ng-if="mode=='edit'">
+				<i class="fa fa-save"></i>
+				Guardar
+			</button>
+			<button class="discard button" ng-if="mode!='detail'">
+				Cancelar
+			</button>
+		</div>
+	</div>
+</div>

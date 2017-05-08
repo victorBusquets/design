@@ -1,0 +1,41 @@
+<div class="content list">
+	<h3>{{config.listTitle}}</h3>
+	
+	<div class="table-adaptative">
+		<table>
+			<thead>
+				<tr>
+					<th></th><!-- Detail head -->
+					<th></th><!-- Edit head -->
+					<th></th><!-- Remove head -->
+					<th ng-repeat="field in config.fields">{{field.title}}<th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="row in rows" class="row">
+					<td class="action view">
+						<a ui-sref="record-list.grid({dataType:dataType, action:'detail', id:row._id})">
+							<i class="fa fa-search-plus"></i>
+						</a>
+					</td>
+					<td class="action edit">
+						<a ui-sref="record-list.grid({dataType:dataType, action:'edit', id:row._id})">
+							<i class="fa fa-pencil"></i>
+						</a>
+					</td>
+					<td class="action remove">
+						<a ui-sref="record-list.grid({dataType:dataType, action:'delete', id:row._id})">
+							<i class="fa fa-trash-o"></i>
+						</a>
+					</td>
+					<td ng-repeat="field in config.fields">
+						{{ getRowFieldValue(row, field) | cut:15 }}
+					<td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+</div>
+<div class="column second-column" ui-view="">
+</div>

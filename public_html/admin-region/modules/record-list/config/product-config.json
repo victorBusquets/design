@@ -1,0 +1,49 @@
+{
+	"listTitle": "Listado de productos",
+	"itemTitle": "Producto",
+	"initialPage": 1,
+	"endPoint": {
+		"list": "/api/product"
+	},
+	"fields":[
+		{
+			"gridHidde": true,
+			"name": "_id",
+			"title": "#ID"
+		},
+		{
+			"name": "name",
+			"title": "Nombre"
+		},
+		{
+			"name": "description",
+			"title": "Descripción"
+		},		
+		{
+			"name": "energy",
+			"title": "Energía"
+		},	
+		{
+			"name": "quantity",
+			"title": "Cantidad"
+		},				
+		{
+			"name": "protein",
+			"title": "Proteinas"
+		},		
+		{
+			"name": "fats",
+			"title": "Grasas"
+		},
+		{
+			"name": "carbohydrates",
+			"title": "Carbohidratos"
+		},
+		{
+			"name": "category",
+			"subName": "name",
+			"title": "Categoria"
+		}
+		
+	]
+}
