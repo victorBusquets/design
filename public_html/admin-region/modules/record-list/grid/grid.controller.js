@@ -2,33 +2,48 @@
     'use strict';
 
     angular.module('design.modules.record-list.grid.controller', [])
-        .controller("RecordGridController", ["$scope", "$http", "$stateParams", function( $scope, $http, $stateParams ) {						
-				var titles = {
-					'detail': 'Detalles de ',
-					'new': 'Nuevo ',
-					'delete': 'Confirme eliminación de ',
-					'edit': 'Edicion datos de '
-				};
-								
-				$scope.getRecordDetails = function(id){
-					
-					$http.get( $scope.config.endPoint.list+"/"+id )
-						.success(function (data) {
-							$scope.record= data;
-						})
-						.error(function (data) {
-							console.log("there was an error");
-						});
-				};
-				
+        .controller("RecordGridController", ["$scope", "$http", "$stateParams", "$q", function( $scope, $http, $stateParams, $q ) {								
 				$scope.setMode = function(){
 					$scope.mode = $stateParams.action;
-					$scope.title = ( titles[$stateParams.action] || 'Nuevo' ) + $scope.config.itemTitle + ( ' '+$stateParams.id || '' ) ;
-					$scope.editionDisabled = $scope.mode != 'edit' && $scope.mode != 'new';
+					$scope.title = $scope.config.itemTitles[$stateParams.action]  + ( $stateParams.id || '' ) ;
 				};
 				
-				$scope.getRowFieldValue= function(record, field){
-					return field.subName ? record[field.name][field.subName] : record[field.name];
+				$scope.isDisabled = function(){
+					return $scope.mode != 'edit' && $scope.mode != 'new';
+				};
+				
+				$scope.getRecordDetails = function(id){
+					return $http.get( $scope.config.endPoint.list+"/"+id );
+				};
+				
+				$scope.getDependency = function( endPoint ){
+					return $http.get( endPoint );
+				};
+				
+				$scope.loadData = function(){
+					var dataPromise = new Array(),
+						dataStorage = new Array();
+					
+					if( $stateParams.id!=undefined ){
+						dataPromise.push( $scope.getRecordDetails( $stateParams.id ) );
+						dataStorage.push( 'record' );
+					}
+					if( $scope.config.dependencies && ( $scope.mode === 'edit' || $scope.mode === 'new' ) ){
+						$scope.config.dependencies.map(function(dependency){
+							dataPromise.push( $scope.getDependency( dependency.endPoint ) );
+							dataStorage.push( dependency.name );							
+						});
+					}
+					
+					dataPromise = $q.all(dataPromise);
+					
+					dataPromise.then(function( res ){				
+						dataStorage.map(function( dataName, index ){
+							$scope[dataName] = res[index].data;
+						});
+					},function(error){
+						console.log( error );	
+					});
 				};
 				
 				$scope.getConfig = function(dataType){
@@ -36,12 +51,20 @@
 						.success(function (data) {
 							$scope.config = data;
 							$scope.setMode();
-							if($stateParams.id!=undefined)	$scope.getRecordDetails( $stateParams.id );
+							$scope.loadData();
 						})
 						.error(function (data) {
 							console.log("there was an error");
 						});
 				};
+				
+				$scope.getDependencyValue = function(name){
+					return $scope[name];
+				};
+				
+				$scope.printRecord = function(){
+					console.log($scope.record);
+				}
 				
 				$scope.getConfig( $stateParams.dataType );
 		}]);

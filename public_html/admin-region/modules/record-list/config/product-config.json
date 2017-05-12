@@ -1,10 +1,22 @@
 {
 	"listTitle": "Listado de productos",
-	"itemTitle": "Producto",
+	"itemTitles": {
+		"detail": "Detalles de Producto ",
+		"new": "Nuevo Producto ",
+		"delete": "Confirme eliminación de Producto ",
+		"edit": "Edicion datos de Producto "
+	},
 	"initialPage": 1,
 	"endPoint": {
 		"list": "/api/product"
 	},
+	"dependencies":[
+		{
+			"field": "category",
+			"name": "categories",
+			"endPoint": "/api/category"
+		}
+	],
 	"fields":[
 		{
 			"gridHidden": true,
@@ -17,7 +29,8 @@
 		},
 		{
 			"name": "description",
-			"title": "Descripción"
+			"title": "Descripción",
+			"type": "textarea"
 		},		
 		{
 			"name": "energy",
@@ -42,7 +55,9 @@
 		{
 			"name": "category",
 			"subName": "name",
-			"title": "Categoria"
+			"title": "Categoria",
+			"type": "select",
+			"dependency": "categories"
 		}
 		
 	]

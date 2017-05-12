@@ -1,6 +1,11 @@
 <div class="content list">
-	<h3>{{config.listTitle}}</h3>
-	
+	<div class="head">
+		<h3>{{config.listTitle}}</h3>
+		<a class="new" ui-sref="record-list.grid({dataType:dataType, action:'new', id:''})">
+			<i class="fa fa-plus"></i>
+			Añadir
+		</a>
+	</div>
 	<div class="table-adaptative">
 		<table>
 			<thead>

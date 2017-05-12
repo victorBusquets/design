@@ -1,6 +1,11 @@
 {
 	"listTitle": "Listado de Categorias",
-	"itemTitle": "Categoria",
+	"itemTitles": {
+		"detail": "Detalles de Categoria ",
+		"new": "Nueva Categoria ",
+		"delete": "Confirme eliminación de Categoria ",
+		"edit": "Edicion datos de Categoria "
+	},
 	"initialPage": 1,
 	"endPoint": {
 		"list": "/api/category"

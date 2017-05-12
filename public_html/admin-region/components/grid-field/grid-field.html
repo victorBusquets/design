@@ -1,0 +1,23 @@
+<div class="grid-field">
+	<p>{{gridField.title}}</p>
+	<input 	ng-if="gridField.type === undefined" 
+			ng-disabled="gridField.disabled" 
+			placeholder="{{getPlaceholder()}}"
+			ng-model="gridField.value"/>
+			
+	<textarea 	ng-if="gridField.type === 'textarea'" 
+				ng-disabled="gridField.disabled"
+				placeholder="{{getPlaceholder()}}"				
+				ng-model="gridField.value"/>
+	
+	<input 	ng-if="gridField.type === 'select' && gridField.disabled" 
+			ng-disabled="gridField.disabled" 
+			placeholder="{{getPlaceholder()}}"
+			ng-model="gridField.subvalue"/>
+	
+	<select	ng-if="gridField.type === 'select' && !gridField.disabled" 
+			ng-model="gridField.value"
+			ng-init="prepareSelectedValue()"
+			ng-options="option as option.name for option in gridField.dependency">
+	</select>
+</div>

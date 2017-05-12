@@ -4,11 +4,15 @@
 	</h3>
 	
 	<div class="grid" ng-if="record">
-		<div ng-repeat="field in config.fields" ng-if="!field.gridHidden" class="input-holder">
-			<p>{{field.title}}</p>
-			<input ng-if="field.subName" ng-disabled="editionDisabled" ng-model="record[field.name][field.subName]"/>
-			<input ng-if="!field.subName" ng-disabled="editionDisabled" ng-model="record[field.name]"/>
-		</div>
+		<dir-grid-field ng-repeat="field in config.fields" 
+						ng-if="!field.gridHidden"
+						value="record[field.name]"
+						subvalue="record[field.name][field.subName]"
+						data-title="field.title"
+						data-disabled="isDisabled()"
+						data-type="field.type"
+						data-dependency="getDependencyValue(field.dependency)">
+		</dir-grid-field>
 		<div class="buttons">
 			<button class="new button" ng-if="mode=='new'">
 				<i class="fa fa-plus"></i>
@@ -22,7 +26,7 @@
 				<i class="fa fa-save"></i>
 				Guardar
 			</button>
-			<button class="discard button" ng-if="mode!='detail'">
+			<button class="discard button" ng-click="printRecord()" ng-if="mode!='detail'">
 				Cancelar
 			</button>
 		</div>
