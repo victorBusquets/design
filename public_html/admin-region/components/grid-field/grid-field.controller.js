@@ -10,7 +10,7 @@
 			};			
 			
 			$scope.getPlaceholder = function(){
-				return $scope.gridField.disabled && $scope.gridField.placeholder == undefined  ? '' : $scope.gridField.placeholder;
+				return $scope.gridField.disabled ? '' : $scope.gridField.title;
 			};
 		}]);
 }());
