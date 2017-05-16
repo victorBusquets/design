@@ -7,15 +7,16 @@
 					$scope.mode = $stateParams.action;
 					$scope.title = $scope.config.itemTitles[$stateParams.action]  + ( $stateParams.id || '' ) ;
 				};
-				
 				$scope.isDisabled = function(){
 					return $scope.mode != 'edit' && $scope.mode != 'new';
+				};			
+				$scope.getDependencyValue = function(name){
+					return $scope[name];
 				};
 				
 				$scope.getRecordDetails = function(id){
 					return $http.get( $scope.config.endPoint.list+"/"+id );
 				};
-				
 				$scope.getDependency = function( endPoint ){
 					return $http.get( endPoint );
 				};
@@ -45,7 +46,6 @@
 						console.log( error );	
 					});
 				};
-				
 				$scope.getConfig = function(dataType){
 				    $http.get("modules/record-list/config/"+dataType+"-config.json")
 						.success(function (data) {
@@ -57,14 +57,6 @@
 							console.log("there was an error");
 						});
 				};
-				
-				$scope.getDependencyValue = function(name){
-					return $scope[name];
-				};
-				
-				$scope.printRecord = function(){
-					console.log($scope.record);
-				}
 				
 				$scope.getConfig( $stateParams.dataType );
 		}]);
