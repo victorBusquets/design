@@ -3,9 +3,25 @@
 
     angular.module('design.modules.record-list.grid.controller', [])
         .controller("RecordGridController", ["$scope", "$http", "$stateParams", "$q", function( $scope, $http, $stateParams, $q ) {								
+				var modeConfig = {
+					'new': {
+						'ico': 'fa-plus',
+						'text': 'Crear'
+					},
+					'edit': {
+						'ico': 'fa-save',
+						'text': 'Guardar'
+					},
+					'delete': {
+						'ico': 'fa-trash-o',
+						'text': 'Eliminar'
+					}
+				};
+				
 				$scope.setMode = function(){
 					$scope.mode = $stateParams.action;
 					$scope.title = $scope.config.itemTitles[$stateParams.action]  + ( $stateParams.id || '' ) ;
+					$scope.buttonParams = modeConfig[$scope.mode];
 				};
 				$scope.isDisabled = function(){
 					return $scope.mode != 'edit' && $scope.mode != 'new';
@@ -56,7 +72,7 @@
 						.error(function (data) {
 							console.log("there was an error");
 						});
-				};
+				};				
 				
 				$scope.getConfig( $stateParams.dataType );
 		}]);
