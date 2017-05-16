@@ -5,7 +5,10 @@
     angular.module('design.modules.record-list.controller', [])
         .controller("RecordListController", ["$scope", "$http", "$stateParams", function( $scope, $http, $stateParams ) {			
 			$scope.getData = function(){
-				$http.get( $scope.config.endPoint.list )
+				$http({
+					method: $scope.config.endPoint.list.method,
+					url: $scope.config.endPoint.list.url 
+					})
 					.success(function (data) {
 						$scope.rows = data;
 					})
@@ -15,15 +18,15 @@
 			};
 			
 			$scope.getConfig = function(dataType){
-					$scope.dataType = dataType;
-				    $http.get("modules/record-list/config/"+dataType+"-config.json")
-						.success(function (data) {
-							$scope.config = data;
-							$scope.getData();
-						})
-						.error(function (data) {
-							console.log("there was an error");
-						});
+				$scope.dataType = dataType;
+				$http.get("modules/record-list/config/"+dataType+"-config.json")
+					.success(function (data) {
+						$scope.config = data;
+						$scope.getData();
+					})
+					.error(function (data) {
+						console.log("there was an error");
+					});
 			};
 			
 			$scope.getConfig( $stateParams.dataType );

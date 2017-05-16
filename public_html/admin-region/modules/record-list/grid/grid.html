@@ -3,7 +3,7 @@
 		{{title}}
 	</h3>
 	
-	<div class="grid" ng-if="record">
+	<div class="grid" ng-if="renderReady">
 		<dir-grid-field ng-repeat="field in config.fields" 
 						ng-if="!field.gridHidden"
 						value="record[field.name]"
@@ -15,7 +15,7 @@
 		</dir-grid-field>
 		
 		<div class="buttons" ng-if="mode !== 'detail'">
-			<button class="{{mode}} button">
+			<button data-loading="{{loading}}" class="{{mode}} button" ng-click="gridAction()">
 				<i class="fa {{buttonParams.ico}}"></i>
 				<i class="load fa fa-cog fa-spin"></i>
 				<span>{{buttonParams.text}}</span>

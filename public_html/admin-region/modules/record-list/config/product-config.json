@@ -8,13 +8,37 @@
 	},
 	"initialPage": 1,
 	"endPoint": {
-		"list": "/api/product"
+		"list": {
+			"method": "GET",
+			"url": "/api/product"
+		},
+		"detail": {
+			"method": "GET",
+			"url": "/api/product",
+			"urlParam": true
+		},
+		"new": {
+			"method": "POST",
+			"url": "/api/product"
+		},
+		"delete": {
+			"method": "DELETE",
+			"url": "/api/product",
+			"urlParam": true
+		},
+		"edit": {
+			"method": "PUT",
+			"url": "/api/product"
+		}
 	},
 	"dependencies":[
 		{
 			"field": "category",
 			"name": "categories",
-			"endPoint": "/api/category"
+			"endPoint": {
+				"method": "GET",
+				"url": "/api/category"
+			}
 		}
 	],
 	"fields":[

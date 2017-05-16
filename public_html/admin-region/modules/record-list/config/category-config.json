@@ -8,8 +8,29 @@
 	},
 	"initialPage": 1,
 	"endPoint": {
-		"list": "/api/category"
-	},
+		"list": {
+			"method": "GET",
+			"url": "/api/category"
+		},
+		"detail": {
+			"method": "GET",
+			"url": "/api/category",
+			"urlParam": true
+		},
+		"new": {
+			"method": "POST",
+			"url": "/api/category"
+		},
+		"delete": {
+			"method": "DELETE",
+			"url": "/api/category",
+			"urlParam": true
+		},
+		"edit": {
+			"method": "PUT",
+			"url": "/api/category"
+		}
+	},	
 	"fields":[
 		{
 			"gridHidden": true,

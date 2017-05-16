@@ -284,10 +284,10 @@ body{
 	display:none;
 	text-align:center;
 }
-.grid .buttons .button.loading *{
+.grid .buttons .button[data-loading='true'] *{
 	display:none;
 }
-.grid .buttons .button.loading .load{
+.grid .buttons .button[data-loading='true'] .load{
 	display:block;
     font-size: 15px;
     line-height: 15px;

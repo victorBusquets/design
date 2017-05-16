@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('design.modules.record-list.grid.controller', [])
-        .controller("RecordGridController", ["$scope", "$http", "$stateParams", "$q", function( $scope, $http, $stateParams, $q ) {								
+        .controller("RecordGridController", ["$scope", "$http", "$stateParams", "$q", "$document", function( $scope, $http, $stateParams, $q, $document ) {								
 				var modeConfig = {
 					'new': {
 						'ico': 'fa-plus',
@@ -16,7 +16,9 @@
 						'ico': 'fa-trash-o',
 						'text': 'Eliminar'
 					}
-				};
+				};				
+				$scope.loading = false;
+				$scope.record = {};
 				
 				$scope.setMode = function(){
 					$scope.mode = $stateParams.action;
@@ -30,19 +32,27 @@
 					return $scope[name];
 				};
 				
-				$scope.getRecordDetails = function(id){
-					return $http.get( $scope.config.endPoint.list+"/"+id );
+				$scope.getRecordDetails = function(endPoint, id){
+					var url = endPoint.url + ( endPoint.urlParam ? "/" + id : "");
+					
+					return $http({
+						method: endPoint.method,
+						url: url
+					});
 				};
-				$scope.getDependency = function( endPoint ){
-					return $http.get( endPoint );
+				$scope.getDependency = function( endPoint ){				
+					return $http({
+						method: endPoint.method,
+						url: endPoint.url
+					});
 				};
 				
 				$scope.loadData = function(){
 					var dataPromise = new Array(),
 						dataStorage = new Array();
 					
-					if( $stateParams.id!=undefined ){
-						dataPromise.push( $scope.getRecordDetails( $stateParams.id ) );
+					if( $stateParams.id != "" ){
+						dataPromise.push( $scope.getRecordDetails( $scope.config.endPoint.detail, $stateParams.id ) );
 						dataStorage.push( 'record' );
 					}
 					if( $scope.config.dependencies && ( $scope.mode === 'edit' || $scope.mode === 'new' ) ){
@@ -50,6 +60,8 @@
 							dataPromise.push( $scope.getDependency( dependency.endPoint ) );
 							dataStorage.push( dependency.name );							
 						});
+					}else{
+						$scope.renderReady = true;
 					}
 					
 					dataPromise = $q.all(dataPromise);
@@ -57,24 +69,55 @@
 					dataPromise.then(function( res ){				
 						dataStorage.map(function( dataName, index ){
 							$scope[dataName] = res[index].data;
+							$scope.renderReady = dataStorage.length === index+1;
 						});
 					},function(error){
 						console.log( error );	
 					});
 				};
+				
 				$scope.getConfig = function(dataType){
-				    $http.get("modules/record-list/config/"+dataType+"-config.json")
-						.success(function (data) {
-							$scope.config = data;
-							$scope.setMode();
-							$scope.loadData();
-						})
-						.error(function (data) {
-							console.log("there was an error");
-						});
-				};				
+				    $http({
+						method: 'GET',
+						url:	'modules/record-list/config/'+dataType+'-config.json'
+					})
+					.success(function (data) {
+						$scope.config = data;
+						$scope.setMode();
+						$scope.loadData();
+					})
+					.error(function (data) {
+						console.log("there was an error");
+					});
+				};					
+						
+
+						
+				$scope.gridAction = function(){					
+					var endPoint = $scope.config.endPoint[$scope.mode],
+						url = endPoint.url + ( endPoint.urlParam ? "/" + $scope.record._id : "" );
+						
+					$scope.loading = true;
+						
+					$http({
+						method: endPoint.method,
+						url:	url,
+						data: 	$scope.record
+					})
+					.success(function (data) {
+						console.log( "GRID ACTION SUCCESS", data );
+						$scope.loading = false;
+					})
+					.error(function (data) {
+						console.log( "GRID ACTION was an error", data );
+						$scope.loading = false;
+					});
+						
+				};
 				
 				$scope.getConfig( $stateParams.dataType );
+				
+				
 		}]);
 		
 }());
