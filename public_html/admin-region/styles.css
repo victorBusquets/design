@@ -280,6 +280,19 @@ body{
 	color:white;
     padding: 3px;
 }
+.grid .buttons .button .load{
+	display:none;
+	text-align:center;
+}
+.grid .buttons .button.loading *{
+	display:none;
+}
+.grid .buttons .button.loading .load{
+	display:block;
+    font-size: 15px;
+    line-height: 15px;
+}
+
 .grid .buttons .button:hover{
 	opacity:1;
 }

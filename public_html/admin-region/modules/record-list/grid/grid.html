@@ -14,18 +14,24 @@
 						data-dependency="getDependencyValue(field.dependency)">
 		</dir-grid-field>
 		<div class="buttons">
+			
+			<!--Only 1 button with action and text different-->
 			<button class="new button" ng-if="mode=='new'">
 				<i class="fa fa-plus"></i>
-				Crear
+				<i class="load fa fa-cog fa-spin"></i>
+				<span>Crear</span>
 			</button>
 			<button class="delete button" ng-if="mode=='delete'">
 				<i class="fa fa-trash-o"></i>
-				Eliminar
+				<i class="load fa fa-cog fa-spin"></i>
+				<span>Eliminar</span>
 			</button>
 			<button class="save button" ng-if="mode=='edit'">
 				<i class="fa fa-save"></i>
-				Guardar
+				<i class="load fa fa-cog fa-spin"></i>
+				<span>Eliminar</span>
 			</button>
+			<!--Only 1 button with action and text different-->
 			<button class="discard button" ng-if="mode!='detail'">
 				Cancelar
 			</button>
