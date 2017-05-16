@@ -25,6 +25,7 @@ body{
 	overflow: auto;
 	width: 100%;
 }
+
 .admin-area > .content >.actions>.menu{
 	position:fixed;
 	height:100%;
@@ -306,6 +307,9 @@ body{
     max-width: 100%;
     margin: 0;
     padding: 2px 2.5%;
+}
+.grid-field > select{
+    width: 100%;
 }
 .grid-field > [disabled="disabled"]{
     background: transparent;

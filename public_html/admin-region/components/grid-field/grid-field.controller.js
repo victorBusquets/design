@@ -5,7 +5,7 @@
         .controller("GridFieldController", ["$scope", function( $scope ) {		
 			$scope.prepareSelectedValue = function(){
 				$scope.gridField.value = $scope.gridField.dependency.filter(function(element){
-					return element._id === $scope.gridField.value && $scope.gridField.value._id;
+					return element._id === ( $scope.gridField.value && $scope.gridField.value._id );
 				})[0] || $scope.gridField.dependency[0];
 			};			
 			
