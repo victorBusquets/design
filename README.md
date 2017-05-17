@@ -17,7 +17,10 @@ Levantar node con mocks:
   -> node server mocks
   -> node server onlyFront
   
+ Scrum board:
+
+https://tree.taiga.io/project/victorbusquetsboro-design
  
 Enlaces de referencia:
 
-https://scalegrid.io/blog/fast-paging-with-mongodb/
+https://scalegrid.io/blog/fast-paging-with-mongodb
