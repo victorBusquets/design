@@ -3,9 +3,9 @@ Panel de adminisracion en desarrollo
 
 Tecnologias
 -----------
-  1. AngularJS
-  1. NodeJS
-  1. MongoDB
+	1. AngularJS
+	1. NodeJS
+	1. MongoDB
  
 Para empezar y tras descargar el proyecto debemos instalar sus dependencias tanto del Servidor como del cliente, para ello y teniendo previamente instalado node, ejecutamos `npm install` en la raiz de nuestro proyecto. Este comando instalara las dependencias de nodeJS asi como las dependencias de Front ( usando bower) de manera automatica.
 
@@ -14,12 +14,19 @@ Una vez instaladas nuestras dependencias, podemos levantar el servidor de dos fo
 
 Levantar node con  BD
 ---------------------
-  1. Levantamos MongoDB
-  1. Iniciamos el servidor de node `node server`
+	1. Levantamos MongoDB
+	1. Iniciamos el servidor de node:
+		* `node server`
+		* `nodemon server`
+		* `npm start`
 
 Levantar node con mocks
 -----------------------
-  1. Podemos levantarlo de dos formas, con `node server mocks` o `node server onlyFront`
+		* `node server mocks`
+		* `node server onlyFront`
+		* `nodemon server mocks`
+		* `nodemon server onlyFront`
+		* `npm start mocks`
    
 Enlaces de referencia:
 ----------------------
