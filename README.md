@@ -14,19 +14,22 @@ Una vez instaladas nuestras dependencias, podemos levantar el servidor de dos fo
 
 Levantar node con  BD
 ---------------------
-	1. Levantamos MongoDB
-	1. Iniciamos el servidor de node:
-		* `node server`
-		* `nodemon server`
-		* `npm start`
+1. Levantamos MongoDB
+1. Iniciamos el servidor de node:
+	
+* `node server`
+* `nodemon server`
+* `npm start`
 
 Levantar node con mocks
 -----------------------
-		* `node server mocks`
-		* `node server onlyFront`
-		* `nodemon server mocks`
-		* `nodemon server onlyFront`
-		* `npm start mocks`
+1. Podemos usar cualquiera de estas formas:
+
+* `node server mocks`
+* `node server onlyFront`
+* `nodemon server mocks`
+* `nodemon server onlyFront`
+* `npm start mocks`
    
 Enlaces de referencia:
 ----------------------
