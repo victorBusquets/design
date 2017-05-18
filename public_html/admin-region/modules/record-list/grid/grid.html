@@ -3,14 +3,15 @@
 		{{title}}
 	</h3>
 	
-	<div class="grid" ng-if="renderReady">
+
+	<form name="grid" novalidate class="grid" ng-if="renderReady">
 		<dir-grid-field ng-repeat="field in config.fields" 
 						ng-if="!field.gridHidden"
-						value="record[field.name]"
-						subvalue="record[field.name][field.subName]"
-						data-title="field.title"
+						data-value="record[field.name]"
+						data-subvalue="record[field.name][field.subName]"
 						data-disabled="isDisabled()"
-						data-type="field.type"
+						data-config="field"
+						data-error="grid"
 						data-dependency="getDependencyValue(field.dependency)">
 		</dir-grid-field>
 		
@@ -24,5 +25,5 @@
 				Cancelar
 			</button>
 		</div>
-	</div>
+	</form>
 </div>

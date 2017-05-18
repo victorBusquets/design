@@ -45,13 +45,15 @@ body{
 	text-align:center;
 	opacity:.8;
 }
-.menu .action:hover, .menu .action.active{
+.menu .action:hover,
+.menu .action.active{
 	opacity:1;
 }
 .menu .action:hover a{
 	text-decoration:underline;
 }
-.menu .action a, .menu .action a:active{
+.menu .action a,
+.menu .action a:active{
     color: white;
 	text-decoration:none;
 }
@@ -321,6 +323,23 @@ body{
     margin: 0;
     padding: 2px 2.5%;
 }
+.showError .grid-field .errors,
+.grid-field .ng-dirty + .errors{
+	display: block;
+}
+.grid-field .errors{
+	display:none;
+	padding-left: 20px;
+	color: #b50000;
+}
+.grid-field .errors .error{
+	margin: 0;
+}
+.grid-field .errors .error::before{
+	content:'-';
+	display:inline-block;
+}
+
 .grid-field > select{
     width: 100%;
 }

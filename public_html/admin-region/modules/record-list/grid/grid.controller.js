@@ -16,7 +16,12 @@
 						'ico': 'fa-trash-o',
 						'text': 'Eliminar'
 					}
-				};				
+				};
+				
+				function showErrors(){
+					$(".grid").addClass("showError");
+				};
+				
 				$scope.loading = false;
 				$scope.record = {};
 				
@@ -90,13 +95,13 @@
 						console.log("there was an error");
 					});
 				};					
-						
-
-						
+												
 				$scope.gridAction = function(){					
 					var endPoint = $scope.config.endPoint[$scope.mode],
 						url = endPoint.url + ( endPoint.urlParam ? "/" + $scope.record._id : "" );
-						
+					
+					showErrors();
+					
 					$scope.loading = true;
 						
 					$http({
@@ -114,9 +119,8 @@
 					});
 						
 				};
-				
+								
 				$scope.getConfig( $stateParams.dataType );
-				
 				
 		}]);
 		

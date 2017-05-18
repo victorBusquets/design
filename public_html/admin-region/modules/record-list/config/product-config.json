@@ -49,7 +49,10 @@
 		},
 		{
 			"name": "name",
-			"title": "Nombre"
+			"title": "Nombre",
+			"validations": {
+				"required": "Campo requerido"
+			}
 		},
 		{
 			"name": "description",
@@ -57,31 +60,59 @@
 			"type": "textarea"
 		},		
 		{
-			"name": "energy",
-			"title": "Energía"
-		},	
-		{
 			"name": "quantity",
-			"title": "Cantidad"
+			"title": "Cantidad",
+			"type": "number",
+			"validations":{
+				"required": "Campo requerido",
+				"number": "Este campo debe ser un numero valido"
+			}
 		},				
 		{
+			"name": "energy",
+			"title": "Energía",
+			"type": "number",
+			"validations":{
+				"required": "Campo requerido",
+				"number": "Este campo debe ser un numero valido"
+			}
+		},	
+		{
 			"name": "protein",
-			"title": "Proteinas"
+			"title": "Proteinas",
+			"type": "number",
+			"validations":{
+				"required": "Campo requerido",
+				"number": "Este campo debe ser un numero valido"
+			}
 		},		
 		{
 			"name": "fats",
-			"title": "Grasas"
+			"title": "Grasas",
+			"type": "number",
+			"validations":{
+				"required": "Campo requerido",
+				"number": "Este campo debe ser un numero valido"
+			}
 		},
 		{
 			"name": "carbohydrates",
-			"title": "Carbohidratos"
+			"title": "Carbohidratos",
+			"type": "number",
+			"validations":{
+				"required": "Campo requerido",
+				"number": "Este campo debe ser un numero valido"
+			}
 		},
 		{
 			"name": "category",
 			"subName": "name",
 			"title": "Categoria",
 			"type": "select",
-			"dependency": "categories"
+			"dependency": "categories",
+			"validations":{
+				"required": "Campo requerido"
+			}
 		}
 		
 	]

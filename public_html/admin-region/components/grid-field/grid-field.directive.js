@@ -12,10 +12,10 @@
 			scope:{
 				value: '=',
 				subvalue: '=',
-				type: '=',
-				title: '=',
+				config: '=',
 				disabled: '=',
-				dependency: '='
+				dependency: '=',
+				error: '='
 			},
 			bindToController: true
 		};

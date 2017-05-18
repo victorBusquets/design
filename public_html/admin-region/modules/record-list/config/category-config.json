@@ -39,7 +39,10 @@
 		},
 		{
 			"name": "name",
-			"title": "Nombre"
+			"title": "Nombre",
+			"validations": {
+				"required": "Campo requerido"
+			}
 		}
 	]
 }

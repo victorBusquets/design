@@ -8,22 +8,22 @@
 					return element._id === ( $scope.gridField.value && $scope.gridField.value._id );
 				})[0] ;
 			};
-			
-			function addDefaultOption(){
-				$scope.gridField.dependency.unshift({
-					_id: null,
-					name: 'Seleccione una opción'
-				});
-				$scope.gridField.value = $scope.gridField.dependency[0];
-			};
-			
+					
+			function showDefaultOption(){
+				$scope.showDefault = true;
+			}
+					
 			$scope.prepareSelectedValue = function(){
-				$scope.gridField.value ?  filterSelectedValue() : addDefaultOption();
+				$scope.gridField.value ?  filterSelectedValue() : showDefaultOption();
 			};			
 			
 			
 			$scope.getPlaceholder = function(){
-				return $scope.gridField.disabled ? '' : $scope.gridField.title;
-			};
+				return $scope.gridField.disabled ? '' : $scope.gridField.config.title;
+			};	
+						
+			$scope.gridField.config.type = ( $scope.gridField.config.type || 'text' );
+				
+			$scope.isRequired = $scope.gridField.config.validations && $scope.gridField.config.validations.required != undefined;
 		}]);
 }());
