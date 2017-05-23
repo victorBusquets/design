@@ -4,7 +4,7 @@
 
     angular.module('design.modules.record-list.controller', [])
         .controller("RecordListController", ["$scope", "$http", "$stateParams", function( $scope, $http, $stateParams ) {			
-			$scope.orderBy = "";
+			$scope.orderBy = "order=desc";
 			
 			function prepareParams(){
 				return "?" + $scope.orderBy;
