@@ -245,7 +245,8 @@ body{
 
 /*COMMON*/
 .list > .head{
-	position:relative;
+	position: relative;
+	margin-bottom: 10px;
 }
 .list > .head .new{
     position: absolute;
@@ -421,4 +422,13 @@ body{
 }
 .header .sesion-info .logout:hover{
 	opacity:1;
+}
+
+/*Table filters*/
+.table-filters{
+	height: 20px;
+    margin-bottom: 10px;
+}
+.table-filters select{
+	float: right;
 }

@@ -37,7 +37,7 @@
 			"name": "categories",
 			"endPoint": {
 				"method": "GET",
-				"url": "/api/category"
+				"url": "/api/category?order=asc&orderBy=name"
 			}
 		}
 	],

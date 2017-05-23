@@ -6,6 +6,12 @@
 			Añadir
 		</a>
 	</div>
+	<div class="table-filters">
+		<select ng-model="orderBy" ng-change="getData()">
+			<option selected value="">Filtrar por fecha modificación descendente</option>  
+			<option value="order=asc">Filtrar por fecha modificación ascendente</option>
+		</select>
+	</div>
 	<div class="table-adaptative">
 		<table>
 			<thead>

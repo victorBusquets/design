@@ -3,6 +3,11 @@
 //File: persistance/mocks/ProductDAO.js
 	module.exports = function( products, Securize ) {
 		var _findAllProduct = function (req, res) {
+			var order = req.query.order || -1,
+				orderBy = req.query.orderBy || "lastModification";
+
+			products = products.sort( function(a,b){ return order == "asc" ? a[orderBy] > b[orderBy] :  b[orderBy] > a[orderBy] });
+		
 			_utils.setResponse( res, products, 200, true );
 		},
 		_findProductByCategory = function (req, res) {			

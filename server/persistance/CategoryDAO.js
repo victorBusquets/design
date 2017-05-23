@@ -1,11 +1,17 @@
 'use strict';
 
 //File: persistance/CategoryDAO
-	module.exports = function( CategoryModel, ProductModel, Securize ) {
+	module.exports = function( CategoryModel, ProductModel, Securize ) {	
 		var _findAllCategory = function (req, res) {
-			CategoryModel.find({}, function (error, categories) {
+			var order = (req.query.order=='asc' || req.query.order=='desc') ? req.query.order : -1,
+				orderBy = req.query.orderBy || "lastModification",
+				orderFilter = {};
+				
+			orderFilter[orderBy] = order;
+							
+			CategoryModel.find().sort( orderFilter ).exec( function (error, categories) {
 				_utils.prepareResponse(error, categories, res);
-			})
+			});
 		},
 		_getCategory = function (req, res) {
 			CategoryModel.findById(req.params.id ,function(error, category){
@@ -14,7 +20,8 @@
 		},
 		_newCategory = function (req, res){
 			var categoryModel = new CategoryModel({
-				name: req.body.name
+				name: req.body.name,
+				lastModification: new Date()
 			});
 
 			categoryModel.save(function(error, document){
@@ -28,6 +35,7 @@
 					_utils.setResponse(res, error, 500, true);
 				}else{
 					category.name = req.body.name;
+					category.lastModification =  new Date();
 
 					category.save(function(error, documento){
 						var categoryMessage = "Categoria modificada correctamente.";

@@ -4,6 +4,11 @@
 	module.exports = function( categories, Securize ) {	
 		
 		var _findAllCategory = function (req, res) {
+			var order = req.query.order || -1,
+				orderBy = req.query.orderBy || "lastModification";
+
+			categories = categories.sort( function(a,b){ return order == "asc" ? a[orderBy] > b[orderBy] :  b[orderBy] > a[orderBy] });
+			
 			_utils.setResponse( res, categories, 200, true );
 		},
 		_getCategory = function (req, res) {			

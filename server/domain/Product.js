@@ -12,7 +12,8 @@
 				protein:		{ type: Number,  required: true },
 				fats: 			{ type: Number,  required: true },
 				carbohydrates: 	{ type: Number,  required: true },
-				category: 		{ type: mongoose.Schema.ObjectId,  required: true, ref: "Category" }
+				category: 		{ type: mongoose.Schema.ObjectId,  required: true, ref: "Category" },
+				lastModification:	{ type: Date, required: true }
 			})
 		);
 	};

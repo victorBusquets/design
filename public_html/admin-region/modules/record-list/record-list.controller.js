@@ -4,10 +4,16 @@
 
     angular.module('design.modules.record-list.controller', [])
         .controller("RecordListController", ["$scope", "$http", "$stateParams", function( $scope, $http, $stateParams ) {			
+			$scope.orderBy = "";
+			
+			function prepareParams(){
+				return "?" + $scope.orderBy;
+			};
+			
 			$scope.getData = function(){
 				$http({
 					method: $scope.config.endPoint.list.method,
-					url: $scope.config.endPoint.list.url 
+					url: $scope.config.endPoint.list.url + prepareParams()
 					})
 					.success(function (data) {
 						$scope.rows = data;
@@ -32,7 +38,7 @@
 			$scope.getConfig( $stateParams.dataType );
 			
 			$scope.getRowFieldValue= function(row, field){
-				return field.subName ? row[field.name][field.subName] : row[field.name];
+				return field.subName ? row[field.name] ? row[field.name][field.subName] : '' : row[field.name];
 			}
 		}]);
 }());

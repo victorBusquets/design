@@ -2,8 +2,14 @@
 
 //File: persistance/ProductDAO
 	module.exports = function( ProductModel, CategoryModel, Securize ) {
-		var _findAllProduct = function (req, res) {
-			ProductModel.find(function (error, products) {
+		var _findAllProduct = function (req, res) {	
+			var order = (req.query.order=='asc' || req.query.order=='desc') ? req.query.order : -1,
+				orderBy = req.query.orderBy || "lastModification",
+				orderFilter = {};
+				
+			orderFilter[orderBy] = order;
+
+			ProductModel.find().sort( orderFilter ).exec(function (error, products) {
 				CategoryModel.populate(products, {path: "category"}, function(error, products){
 					_utils.prepareResponse(error, products, res);
 				});
@@ -33,7 +39,8 @@
 				protein:		req.body.protein,
 				fats:			req.body.fats,
 				carbohydrates:	req.body.carbohydrates,
-				category:  		req.body.category._id
+				category:  		req.body.category._id,
+				lastModification: new Date()
 			});
 
 			productModel.save(function(error, document){
@@ -54,7 +61,8 @@
 					product.fats =			req.body.fats;
 					product.carbohydrates =	req.body.carbohydrates;
 					product.category =  	req.body.category._id;
-
+					product.lastModification =  new Date();
+					
 					product.save(function(error, documento){
 						var productMessage = "Producto modificado correctamente.";
 						_utils.prepareResponse(error, productMessage, res);
