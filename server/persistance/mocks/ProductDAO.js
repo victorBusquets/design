@@ -4,35 +4,33 @@
 	module.exports = function( products, Securize ) {
 		var _findAllProduct = function (req, res) {
 			var order = req.query.order || -1,
-				orderBy = req.query.orderBy || "lastModification";
+				orderBy = req.query.orderBy || "lastModification",
+				page = parseInt(req.query.page) || 0,
+				resultsPerPage = parseInt(req.query.resultsPerPage) || false;
 
+			//SORT FILTER
 			products = products.sort( function(a,b){ return order == "asc" ? a[orderBy] > b[orderBy] :  b[orderBy] > a[orderBy] });
+			//PAGINATION
+			products = resultsPerPage ? products.slice( resultsPerPage * page, resultsPerPage * page + resultsPerPage ) : products;
 		
-			_utils.setResponse( res, products, 200, true );
-		},
-		_findProductByCategory = function (req, res) {			
-			var productsByCategory = products.filter(function(product){
-				return product.category._id == req.params.category;
-			});
-
-			_utils.setResponse( res, productsByCategory, 200, true );
+			_utils.prepareResponse( res, false, products );	
 		},
 		_getProduct = function (req, res) {			
 			var product = products.filter(function(product){
 				return product._id == req.params.id;
-			});
+			})[0];
 
-			_utils.setResponse( res, product[0], 200, true );
+			_utils.prepareResponse( res, false, product );
 		},
 		_newProduct = function (req, res){
 			var message = "Producto creado correctamente.";
 			
-			_utils.setResponse( res, message, 200, true );	
+			_utils.prepareResponse( res, false, message );	
 		},
 		_updateProduct = function(req, res){
 			var message = "Producto modificado correctamente.";
 			
-			_utils.setResponse( res, message, 200, true );			
+			_utils.prepareResponse( res, false, message );			
 		},
 		_removeProduct = function(req, res){
 			var product = products.filter(function(product){
@@ -40,11 +38,10 @@
 			}),
 			message = "Producto " + product[0].name + " eliminado";
 			
-			_utils.setResponse( res, message, 200, true );
+			_utils.prepareResponse( res, false, message );	
 		};
 		
 		return {
-			findProductByCategory: _findProductByCategory,
 			findAllProduct: _findAllProduct,
 			getProduct: 	_getProduct,
 			newProduct: 	_newProduct,

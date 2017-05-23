@@ -4,34 +4,43 @@
 
     angular.module('design.modules.record-list.controller', [])
         .controller("RecordListController", ["$scope", "$http", "$stateParams", function( $scope, $http, $stateParams ) {			
+			const RESULT_PER_PAGE = 10;
 			$scope.orderBy = "order=desc";
 			
+			function getPageParams(){
+				return "page=" + $stateParams.page + "&resultsPerPage=" + RESULT_PER_PAGE;
+			};
+			
+			function getOrderParams(){
+				return $scope.orderBy;
+			};
+			
 			function prepareParams(){
-				return "?" + $scope.orderBy;
+				return getOrderParams() +"&"+ getPageParams();
 			};
 			
 			$scope.getData = function(){
 				$http({
 					method: $scope.config.endPoint.list.method,
-					url: $scope.config.endPoint.list.url + prepareParams()
+					url: $scope.config.endPoint.list.url + "?" + prepareParams()
 					})
-					.success(function (data) {
-						$scope.rows = data;
+					.success(function (res) {
+						$scope.rows =	res.data;
 					})
-					.error(function (data) {
-						console.log("there was an error");
+					.error(function (res) {
+						console.log("there was an error", res);
 					});
 			};
 			
 			$scope.getConfig = function(dataType){
 				$scope.dataType = dataType;
 				$http.get("modules/record-list/config/"+dataType+"-config.json")
-					.success(function (data) {
-						$scope.config = data;
+					.success(function (res) {
+						$scope.config = res;
 						$scope.getData();
 					})
-					.error(function (data) {
-						console.log("there was an error");
+					.error(function (res) {
+						console.log("there was an error", res);
 					});
 			};
 			

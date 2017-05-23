@@ -5,28 +5,33 @@
 		
 		var _findAllCategory = function (req, res) {
 			var order = req.query.order || -1,
-				orderBy = req.query.orderBy || "lastModification";
-
-			categories = categories.sort( function(a,b){ return order == "asc" ? a[orderBy] > b[orderBy] :  b[orderBy] > a[orderBy] });
+				orderBy = req.query.orderBy || "lastModification",
+				page = parseInt(req.query.page) || 0,
+				resultsPerPage = parseInt(req.query.resultsPerPage) || false;
 			
-			_utils.setResponse( res, categories, 200, true );
+			//SORT FILTER
+			categories = categories.sort( function(a,b){ return order == "asc" ? a[orderBy] > b[orderBy] :  b[orderBy] > a[orderBy] });
+			//PAGINATION
+			categories = resultsPerPage ? categories.slice( resultsPerPage * page, resultsPerPage * page + resultsPerPage ) : categories;
+			
+			_utils.prepareResponse( res, false, categories );
 		},
 		_getCategory = function (req, res) {			
 			var category = categories.filter(function(category){
 				return category._id == req.params.id;
-			});
+			})[0];
 
-			_utils.setResponse( res, category[0], 200, true );
+			_utils.prepareResponse( res, false, category );
 		},
 		_newCategory = function (req, res){
 			var message = "Categoria creada correctamente.";
 			
-			_utils.setResponse( res, message, 200, true );	
+			_utils.prepareResponse( res, false, message );
 		},
 		_updateCategory = function(req, res){
 			var message = "Categoria modificada correctamente.";
 			
-			_utils.setResponse( res, message, 200, true );			
+			_utils.prepareResponse( res, false, message );			
 		},
 		_removeCategory = function(req, res){
 			var category = categories.filter(function(category){
@@ -34,7 +39,7 @@
 			});
 			message = "Categoria " + category[0].name + " eliminado";
 			
-			_utils.setResponse( res, message, 200, true );
+			_utils.prepareResponse( res, false, message );
 		};
 		
 		return {

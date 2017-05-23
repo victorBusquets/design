@@ -5,17 +5,19 @@
 		var _findAllCategory = function (req, res) {
 			var order = (req.query.order=='asc' || req.query.order=='desc') ? req.query.order : -1,
 				orderBy = req.query.orderBy || "lastModification",
+				page = parseInt(req.query.page) || 0,
+				resultsPerPage = parseInt(req.query.resultsPerPage) || false,
 				orderFilter = {};
 				
 			orderFilter[orderBy] = order;
 							
-			CategoryModel.find().sort( orderFilter ).exec( function (error, categories) {
-				_utils.prepareResponse(error, categories, res);
+			CategoryModel.find().sort( orderFilter ).skip( page * resultsPerPage ).limit( resultsPerPage ).exec( function (error, categories) {
+				_utils.prepareResponse( res, error, categories );
 			});
 		},
 		_getCategory = function (req, res) {
 			CategoryModel.findById(req.params.id ,function(error, category){
-				_utils.prepareResponse(error, category, res);
+				_utils.prepareResponse( res, error, category );
 			})
 		},
 		_newCategory = function (req, res){
@@ -25,8 +27,8 @@
 			});
 
 			categoryModel.save(function(error, document){
-				var categoryMessage = "Categoria " + req.body.name + " creada correctamente.";
-				_utils.prepareResponse(error, categoryMessage, res);
+				var message = "Category created.";
+				_utils.prepareResponse( res, error, message );
 			});
 		},
 		_updateCategory = function(req, res){
@@ -38,8 +40,8 @@
 					category.lastModification =  new Date();
 
 					category.save(function(error, documento){
-						var categoryMessage = "Categoria modificada correctamente.";
-						_utils.prepareResponse(error, categoryMessage, res);
+						var message = "Category saved.";
+						_utils.prepareResponse( res, error, message );
 					});
 				}
 			});
@@ -48,10 +50,12 @@
 			ProductModel.find({category: req.params.id}).count(function(error, count){
 				if( count===0 ){				
 					CategoryModel.remove({_id: req.params.id}, function(error){
-						_utils.prepareResponse(error, "Categoria eliminada correctamente.", res);
+						var message = "Category removed.";
+						_utils.prepareResponse( res, error, message );
 					});	
 				}else{
-					_utils.setResponse(res, 'Categoria con productos asociados.', 409, true)
+					var message = "Category with products.";
+					_utils.setResponse(res, message, 409, true)
 				}
 			});
 		};

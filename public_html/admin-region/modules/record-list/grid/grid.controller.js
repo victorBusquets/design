@@ -73,7 +73,7 @@
 					
 					dataPromise.then(function( res ){				
 						dataStorage.map(function( dataName, index ){
-							$scope[dataName] = res[index].data;
+							$scope[dataName] = res[index].data.data;
 							$scope.renderReady = dataStorage.length === index+1;
 						});
 					},function(error){
@@ -86,13 +86,13 @@
 						method: 'GET',
 						url:	'modules/record-list/config/'+dataType+'-config.json'
 					})
-					.success(function (data) {
-						$scope.config = data;
+					.success(function (res) {
+						$scope.config = res;
 						$scope.setMode();
 						$scope.loadData();
 					})
-					.error(function (data) {
-						console.log("there was an error");
+					.error(function (res) {
+						console.log("there was an error", res);
 					});
 				};					
 												
@@ -109,12 +109,12 @@
 						url:	url,
 						data: 	$scope.record
 					})
-					.success(function (data) {
-						console.log( "GRID ACTION SUCCESS", data );
+					.success(function (res) {
+						console.log( "GRID ACTION SUCCESS", res );
 						$scope.loading = false;
 					})
-					.error(function (data) {
-						console.log( "GRID ACTION was an error", data );
+					.error(function (res) {
+						console.log( "GRID ACTION was an error", res );
 						$scope.loading = false;
 					});
 						

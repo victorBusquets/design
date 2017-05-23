@@ -5,27 +5,22 @@
 		var _findAllProduct = function (req, res) {	
 			var order = (req.query.order=='asc' || req.query.order=='desc') ? req.query.order : -1,
 				orderBy = req.query.orderBy || "lastModification",
+				page = parseInt(req.query.page) || 0,
+				resultsPerPage = parseInt(req.query.resultsPerPage) || false,
 				orderFilter = {};
 				
 			orderFilter[orderBy] = order;
 
-			ProductModel.find().sort( orderFilter ).exec(function (error, products) {
+			ProductModel.find().sort( orderFilter ).skip( page * resultsPerPage ).limit( resultsPerPage ).exec(function (error, products) {
 				CategoryModel.populate(products, {path: "category"}, function(error, products){
-					_utils.prepareResponse(error, products, res);
+					_utils.prepareResponse( res, error, products );
 				});
 			});
-		},
-		_findProductByCategory = function(req, res){
-			ProductModel.find({category:req.params.category}, function (error, products) {
-				CategoryModel.populate(products, {path: "category"}, function(error, products){
-					_utils.prepareResponse(error, products, res);
-				});
-			})
 		},
 		_getProduct = function (req, res) {
 			ProductModel.findById(req.params.id ,function(error, product){
 				CategoryModel.populate(product, {path: "category"}, function(error, product){
-					_utils.prepareResponse(error, product, res);
+					_utils.prepareResponse( res, error, product );
 				});
 			})
 		},
@@ -44,8 +39,8 @@
 			});
 
 			productModel.save(function(error, document){
-				var productMessage = "Producto " + req.body.name + " creado correctamente.";
-				_utils.prepareResponse(error, productMessage, res);
+				var message = "Product created.";
+				_utils.prepareResponse( res, error, message );
 			});
 		},
 		_updateProduct = function(req, res){
@@ -64,20 +59,20 @@
 					product.lastModification =  new Date();
 					
 					product.save(function(error, documento){
-						var productMessage = "Producto modificado correctamente.";
-						_utils.prepareResponse(error, productMessage, res);
+						var message = "Product saved.";
+						_utils.prepareResponse( res, error, message );
 					});
 				}
 			});
 		},
 		_removeProduct = function(req, res){
 			ProductModel.remove({_id: req.params.id}, function(error){
-				_utils.prepareResponse(error, "Producto eliminado correctamente.", res);
+				var message = "Product removed.";
+				_utils.prepareResponse( res, error, message );
 			});
 		};
 		
 		return {
-			findProductByCategory: _findProductByCategory,
 			findAllProduct: _findAllProduct,
 			getProduct: 	_getProduct,
 			newProduct: 	_newProduct,

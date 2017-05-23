@@ -33,14 +33,15 @@
 			jsonFormat ?  res.status(statusCode).json(message) : res.status(statusCode).send(message)
 		};
 		
-		this.prepareResponse = function (error, value, res) {
+		//EXTRA DATA IS USED FOR INFO DATA EXTERNAL (PAGINATION FOR EXAMPLE)
+		this.prepareResponse = function (res, error, data, extraData) {
 			error ?
 				this.setResponse(res, error, 500, true)
 			:
-				value == undefined || value.length == 0 ?
+				data == undefined || data.length == 0 ?
 						this.setResponse(res, null, 204, true)
 					:
-						this.setResponse(res, value, 200, true)
+						this.setResponse(res, { data:data, extraData:extraData }, 200, true)
 		};
 		
 		this.nodeIsUp = function (onlyFrontOrMocks){
