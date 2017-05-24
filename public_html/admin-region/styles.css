@@ -125,7 +125,7 @@ body{
 
 .table-adaptative{
     overflow: auto;
-	margin-bottom:15px;
+	margin-bottom:10px;
     background: #dddfe0;
 	min-height:450px;
 }
@@ -197,19 +197,19 @@ body{
 	color: #b50000;
 }
 
-/*Paginator component*/
-.paginator{
+/*pagination component*/
+.pagination{
     height: 25px;
-    margin: 10px 0;
+    margin: 0;
+	margin-bottom:10px;
     width: 100%;
 }
-.paginator .buttons{
+.pagination .buttons{
     margin: 0 auto;
     height: 100%;
     display: table;
-	cursor:pointer;
 }
-.paginator .buttons .button{
+.pagination .buttons .button{
     height: 100%;
 	opacity: .9;
     width: 35px;
@@ -221,24 +221,26 @@ body{
 	background: #283b48;
     color: white;
 }
-.paginator .buttons .button:hover{
+.pagination .buttons .button:hover{
 	opacity:1;
+	cursor:pointer;
 }
-.paginator .buttons .button.prev{
+.pagination .buttons .button.prev{
 	border-radius:12px 1px 1px 12px;
 	background-color:#061017;
 }
-.paginator .buttons .button.next{
-	border-radius:1px 12px 12px 1px;
+.pagination .buttons .button.next{
+	border-radius:1px 12px 12px 1px;	
 	position:relative;
 	z-index:1;
 	background-color:#061017;
 }
-.paginator .buttons .button.deactivate{
+
+.pagination .buttons .button.deactivate{
     pointer-events: none;
 	background-color: rgba(6, 16, 23, .5);
 }
-.paginator .buttons .button.active{
+.pagination .buttons .button.active{
 	background: #6189a4;
 	opacity:1;
 }
@@ -422,13 +424,4 @@ body{
 }
 .header .sesion-info .logout:hover{
 	opacity:1;
-}
-
-/*Table filters*/
-.table-filters{
-	height: 20px;
-    margin-bottom: 10px;
-}
-.table-filters select{
-	float: right;
 }

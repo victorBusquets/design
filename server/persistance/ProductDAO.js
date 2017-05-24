@@ -7,15 +7,30 @@
 				orderBy = req.query.orderBy || "lastModification",
 				page = parseInt(req.query.page) || 0,
 				resultsPerPage = parseInt(req.query.resultsPerPage) || false,
-				orderFilter = {};
+				orderFilter = {},
+				extraData = {
+					paginationInfo: {
+						currentPage: page,
+						resultsPerPage: resultsPerPage
+					}
+				};
 				
 			orderFilter[orderBy] = order;
-
-			ProductModel.find().sort( orderFilter ).skip( page * resultsPerPage ).limit( resultsPerPage ).exec(function (error, products) {
-				CategoryModel.populate(products, {path: "category"}, function(error, products){
-					_utils.prepareResponse( res, error, products );
+			
+			
+			ProductModel.count().then(function(totalRecords){
+				extraData.paginationInfo.totalRecords = totalRecords;
+				extraData.paginationInfo.totalPages = parseInt( Math.ceil( totalRecords/resultsPerPage ) ) || 1;
+				
+				ProductModel.find().sort( orderFilter ).skip( page * resultsPerPage ).limit( resultsPerPage ).exec(function (error, products) {
+					CategoryModel.populate(products, {path: "category"}, function(error, products){
+						_utils.prepareResponse( res, error, products, extraData);
+					});
 				});
 			});
+			
+			
+			
 		},
 		_getProduct = function (req, res) {
 			ProductModel.findById(req.params.id ,function(error, product){

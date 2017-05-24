@@ -7,12 +7,23 @@
 				orderBy = req.query.orderBy || "lastModification",
 				page = parseInt(req.query.page) || 0,
 				resultsPerPage = parseInt(req.query.resultsPerPage) || false,
-				orderFilter = {};
+				orderFilter = {},
+				extraData = {
+					paginationInfo: {
+						currentPage: page,
+						resultsPerPage: resultsPerPage
+					}
+				};
 				
 			orderFilter[orderBy] = order;
-							
-			CategoryModel.find().sort( orderFilter ).skip( page * resultsPerPage ).limit( resultsPerPage ).exec( function (error, categories) {
-				_utils.prepareResponse( res, error, categories );
+				
+			CategoryModel.count().then(function(totalRecords){
+				extraData.paginationInfo.totalRecords = totalRecords;
+				extraData.paginationInfo.totalPages = parseInt( Math.ceil( totalRecords/resultsPerPage ) ) || 1;				
+
+				CategoryModel.find().sort( orderFilter ).skip( page * resultsPerPage ).limit( resultsPerPage ).exec( function (error, categories) {
+					_utils.prepareResponse( res, error, categories, extraData );
+				});
 			});
 		},
 		_getCategory = function (req, res) {

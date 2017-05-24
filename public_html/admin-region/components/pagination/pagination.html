@@ -1,0 +1,20 @@
+<div class="pagination no-select">
+	<div class="buttons">
+		<div 	ng-class="pagination.config.currentPage == 0 ? 'deactivate' : ''" 
+				class="button prev"
+				ng-click="navigateToPage(pagination.config.currentPage -1)">
+			<i class="fa fa-backward"></i>
+		</div>
+		<div 	ng-repeat="page in pagination.pages track by $index" 
+				class="button page"
+				ng-class="pagination.config.currentPage === page-1 ? 'active' : ''"
+				ng-click="navigateToPage(page-1)"> 
+			{{page}}
+		</div>
+		<div 	ng-class="pagination.config.currentPage == pagination.config.totalPages-1 ? 'deactivate' : ''" 
+				class="button next"
+				ng-click="navigateToPage(pagination.config.currentPage +1)">
+			<i class="fa fa-forward"></i>
+		</div>
+	</div>
+</div>

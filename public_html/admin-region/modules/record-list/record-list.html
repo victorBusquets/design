@@ -6,12 +6,6 @@
 			Añadir
 		</a>
 	</div>
-	<div class="table-filters">
-		<select ng-model="orderBy" ng-change="getData()">
-			<option selected value="order=desc">Filtrar por fecha modificación descendente</option>  
-			<option value="order=asc">Filtrar por fecha modificación ascendente</option>
-		</select>
-	</div>
 	<div class="table-adaptative">
 		<table>
 			<thead>
@@ -46,6 +40,7 @@
 			</tbody>
 		</table>
 	</div>
+	<dir-pagination ng-if="paginationConfig" data-config="paginationConfig" data-limit="10"></dir-pagination>
 	
 </div>
 <div class="column second-column" ui-view="">

@@ -5,36 +5,37 @@
     angular.module('design.modules.record-list.controller', [])
         .controller("RecordListController", ["$scope", "$http", "$stateParams", function( $scope, $http, $stateParams ) {			
 			const RESULT_PER_PAGE = 10;
-			$scope.orderBy = "order=desc";
+			const ORDER = "desc";
+			$scope.dataType = $stateParams.dataType;
 			
 			function getPageParams(){
 				return "page=" + $stateParams.page + "&resultsPerPage=" + RESULT_PER_PAGE;
 			};
 			
 			function getOrderParams(){
-				return $scope.orderBy;
+				return "order=" + ORDER;
 			};
 			
 			function prepareParams(){
-				return getOrderParams() +"&"+ getPageParams();
+				return "?" + getOrderParams() +"&"+ getPageParams();
 			};
 			
 			$scope.getData = function(){
 				$http({
 					method: $scope.config.endPoint.list.method,
-					url: $scope.config.endPoint.list.url + "?" + prepareParams()
+					url: $scope.config.endPoint.list.url +  prepareParams()
 					})
 					.success(function (res) {
 						$scope.rows =	res.data;
+						$scope.paginationConfig = res.extraData.paginationInfo;
 					})
 					.error(function (res) {
 						console.log("there was an error", res);
 					});
 			};
 			
-			$scope.getConfig = function(dataType){
-				$scope.dataType = dataType;
-				$http.get("modules/record-list/config/"+dataType+"-config.json")
+			$scope.getConfig = function(){
+				$http.get("modules/record-list/config/" + $scope.dataType + "-config.json")
 					.success(function (res) {
 						$scope.config = res;
 						$scope.getData();
@@ -44,7 +45,7 @@
 					});
 			};
 			
-			$scope.getConfig( $stateParams.dataType );
+			$scope.getConfig();
 			
 			$scope.getRowFieldValue= function(row, field){
 				return field.subName ? row[field.name] ? row[field.name][field.subName] : '' : row[field.name];

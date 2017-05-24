@@ -6,14 +6,22 @@
 			var order = req.query.order || -1,
 				orderBy = req.query.orderBy || "lastModification",
 				page = parseInt(req.query.page) || 0,
-				resultsPerPage = parseInt(req.query.resultsPerPage) || false;
-
+				resultsPerPage = parseInt(req.query.resultsPerPage) || false,
+				extraData = {
+					paginationInfo:{
+						currentPage: page,
+						resultsPerPage: resultsPerPage,	
+						totalRecords: products.length,
+						totalPages: parseInt( Math.ceil( products.length/resultsPerPage ) ) || 1
+					}
+				};
+				
 			//SORT FILTER
 			products = products.sort( function(a,b){ return order == "asc" ? a[orderBy] > b[orderBy] :  b[orderBy] > a[orderBy] });
 			//PAGINATION
-			products = resultsPerPage ? products.slice( resultsPerPage * page, resultsPerPage * page + resultsPerPage ) : products;
+			products = resultsPerPage ? products.slice( resultsPerPage * page, resultsPerPage * page + resultsPerPage ) : products;		
 		
-			_utils.prepareResponse( res, false, products );	
+			_utils.prepareResponse( res, false, products, extraData );	
 		},
 		_getProduct = function (req, res) {			
 			var product = products.filter(function(product){

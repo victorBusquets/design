@@ -7,14 +7,22 @@
 			var order = req.query.order || -1,
 				orderBy = req.query.orderBy || "lastModification",
 				page = parseInt(req.query.page) || 0,
-				resultsPerPage = parseInt(req.query.resultsPerPage) || false;
+				resultsPerPage = parseInt(req.query.resultsPerPage) || false,
+				extraData = {
+					paginationInfo:{
+						currentPage: page,
+						resultsPerPage: resultsPerPage,	
+						totalRecords: categories.length,
+						totalPages: parseInt( Math.ceil( categories.length/resultsPerPage ) ) || 1
+					}
+				};
 			
 			//SORT FILTER
 			categories = categories.sort( function(a,b){ return order == "asc" ? a[orderBy] > b[orderBy] :  b[orderBy] > a[orderBy] });
 			//PAGINATION
 			categories = resultsPerPage ? categories.slice( resultsPerPage * page, resultsPerPage * page + resultsPerPage ) : categories;
 			
-			_utils.prepareResponse( res, false, categories );
+			_utils.prepareResponse( res, false, categories, extraData );
 		},
 		_getCategory = function (req, res) {			
 			var category = categories.filter(function(category){
