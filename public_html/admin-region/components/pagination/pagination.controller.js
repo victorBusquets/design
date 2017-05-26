@@ -3,10 +3,12 @@
 
     angular.module('design.components.pagination.controller', [])
         .controller("PaginationController", ["$scope", "$location", function( $scope, $location ) {		
+			var DEFAULT_LIMIT = 11;
+			
 			function getPages(){
 				var currentPage = $scope.pagination.config.currentPage,
 					pages =  $scope.pagination.config.totalPages,
-					limit = parseInt( $scope.pagination.limit ),
+					limit = parseInt( $scope.pagination.limit || DEFAULT_LIMIT ),
 					centerPageIndex = Math.ceil( limit/2 ),
 					pagesList = Array.apply(null, {length: pages}).map(function( el, index ){ return index+1; });
 
