@@ -1,0 +1,9 @@
+<div class="message {{message.config.type}}" ng-show="showMessage">
+	<div class="ico">
+		<i class="fa fa-{{message.config.ico}}"></i>	
+	</div>
+	<p class="text">
+		{{message.config.text}}
+	</p>
+	<i ng-click="closeMessage()" class="close fa fa-times-circle"></i>
+</div>

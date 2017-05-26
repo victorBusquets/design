@@ -1,10 +1,15 @@
 {
 	"listTitle": "Listado de productos",
 	"itemTitles": {
-		"detail": "Detalles de Producto ",
-		"new": "Nuevo Producto ",
-		"delete": "Confirme eliminación de Producto ",
-		"edit": "Edicion datos de Producto "
+		"detail": "Detalles de Producto",
+		"new": "Nuevo Producto",
+		"delete": "Confirme eliminación de Producto",
+		"edit": "Edicion datos de Producto"
+	},
+	"messages": {
+		"new": "Se ha creado un Producto",
+		"delete": "Se ha eliminado un Producto",
+		"edit": "Se ha modificado un Producto"
 	},
 	"initialPage": 1,
 	"endPoint": {

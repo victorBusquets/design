@@ -1,10 +1,15 @@
 {
 	"listTitle": "Listado de Categorias",
 	"itemTitles": {
-		"detail": "Detalles de Categoria ",
-		"new": "Nueva Categoria ",
-		"delete": "Confirme eliminación de Categoria ",
-		"edit": "Edicion datos de Categoria "
+		"detail": "Detalles de Categoria",
+		"new": "Nueva Categoria",
+		"delete": "Confirme eliminación de Categoria",
+		"edit": "Edicion datos de Categoria"
+	},
+	"messages": {
+		"new": "Se ha creado una Categoria",
+		"delete": "Se ha eliminado una Categoria",
+		"edit": "Se ha modificado una Categoria"
 	},
 	"initialPage": 1,
 	"endPoint": {

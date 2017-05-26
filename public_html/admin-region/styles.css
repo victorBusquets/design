@@ -282,6 +282,13 @@ body{
     padding: 2px 5px;
 }
 
+.list > .message-area{    
+	position: absolute;
+    z-index: 1;
+    width: 95%;
+    left: 2.5%;
+}
+
 .grid{
     width: 94%;
     margin: 0 2.5%;
@@ -440,3 +447,71 @@ body{
 .header .sesion-info .logout:hover{
 	opacity:1;
 }
+
+/* COMPONENT MESSAGE */
+.message{
+    min-height: 35px;
+    border: 2.5px solid;
+    border-radius: 10px;
+    max-width: 100%;
+    min-width: 300px;
+    overflow: hidden;
+    display: inline-block;
+    line-height: 35px;
+    color: white;
+    position: relative;
+}
+.message.error,
+.message.delete{
+	border-color: #b50000;
+    background: #b50000;
+}
+.message.new{
+	border-color: #3b9657;
+    background: #3b9657;
+}
+.message.warning{
+	border-color: #968500;
+    background: #968500;
+}
+.message.edit,
+.message.info{
+	border-color: #010171;
+    background: #010171;
+}
+.message .ico{
+	width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    background: white;
+    z-index: 1;
+    position: absolute;
+    border-radius: 10px;
+    font-size: 25px;
+}
+.message.error .ico,
+.message.delete .ico{
+    color: #b50000;
+}
+.message.new .ico{
+    color: #3b9657;
+}
+.message.warning .ico{
+    color: #968500;
+}
+.message.edit .ico,
+.message.info .ico{
+    color: #010171;
+}
+.message .text{
+    margin: 0;
+    padding-left: 45px;
+    padding-right: 20px;
+}
+.message .close{
+	position: absolute;
+    top: 0;
+    right: 3px;
+}
+

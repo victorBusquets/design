@@ -49,6 +49,13 @@
 			
 			$scope.getRowFieldValue= function(row, field){
 				return field.subName ? row[field.name] ? row[field.name][field.subName] : '' : row[field.name];
-			}
+			};
+			
+			$scope.showMessage = function(type){
+				$scope.messageConfig = {
+					type: type,
+					text: $scope.config.messages[type]
+				};				
+			};
 		}]);
 }());

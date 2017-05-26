@@ -111,6 +111,8 @@
 					})
 					.success(function (res) {
 						console.log( "GRID ACTION SUCCESS", res );
+						$scope.showMessage( $scope.mode );
+						$scope.getData();
 						$scope.loading = false;
 					})
 					.error(function (res) {
