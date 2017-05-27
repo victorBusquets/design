@@ -123,7 +123,7 @@
 				};
 								
 				$scope.getConfig( $stateParams.dataType );
-				
+				$scope.setRowOpen( $stateParams.id );
 		}]);
 		
 }());

@@ -162,8 +162,11 @@ body{
     padding: 10px 8px;
     text-align: left;
 }
-.table-adaptative table tr.row:hover{
+.table-adaptative table tr.row.open{
     background: white;
+}
+.table-adaptative table tr.row:hover{
+    background: #a6bbc5;
 }
 .table-adaptative table td{
     padding: 8px;

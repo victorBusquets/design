@@ -44,8 +44,10 @@
 						console.log("there was an error", res);
 					});
 			};
-			
-			$scope.getConfig();
+
+			$scope.setRowOpen = function( id ){
+				$scope.rowOpenId =  id;
+			};
 			
 			$scope.getRowFieldValue= function(row, field){
 				return field.subName ? row[field.name] ? row[field.name][field.subName] : '' : row[field.name];
@@ -57,5 +59,7 @@
 					text: $scope.config.messages[type]
 				};				
 			};
+
+			$scope.getConfig();
 		}]);
 }());

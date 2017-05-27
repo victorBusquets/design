@@ -23,7 +23,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="row in rows" class="row">
+				<tr ng-repeat="row in rows" class="row" ng-class=" rowOpenId ===row._id ? 'open' : '' ">
 					<td class="action view">
 						<a ui-sref="record-list.grid({dataType:dataType, action:'detail', id:row._id})">
 							<i class="fa fa-search-plus"></i>
