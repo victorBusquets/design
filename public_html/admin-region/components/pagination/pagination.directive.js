@@ -11,7 +11,8 @@
 			templateUrl: 'components/pagination/pagination.html',
 			scope:{
 				limit: '=',
-				config: '='
+				config: '=',
+				callback: '='
 			},
 			bindToController: true
 		};

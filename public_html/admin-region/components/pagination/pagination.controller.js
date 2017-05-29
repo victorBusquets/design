@@ -32,17 +32,7 @@
 				}
 
 				return pagesList;
-			};
-			
-			$scope.navigateToPage = function(newPage){
-				var currentPage= $scope.pagination.config.currentPage,
-					url = $location.url();
-				
-				$location.url(
-					url.replace( "page-"+currentPage, "page-"+newPage )
-				);
-			};
-			
+			};		
 			
 			$scope.pagination.pages = getPages();
 			

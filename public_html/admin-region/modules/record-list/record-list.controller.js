@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('design.modules.record-list.controller', [])
-        .controller("RecordListController", ["$scope", "$http", "$stateParams", function( $scope, $http, $stateParams ) {			
+        .controller("RecordListController", ["$scope", "$http", "$stateParams", "$state", function( $scope, $http, $stateParams, $state ) {			
 			const RESULT_PER_PAGE = 10;
 			const ORDER = "desc";
 			$scope.dataType = $stateParams.dataType;
@@ -58,6 +58,22 @@
 					type: type,
 					text: $scope.config.messages[type]
 				};				
+			};
+			
+			$scope.paginationCallback = function( page ){
+				if( $state.params.id ){
+					$state.go('record-list.grid', {
+						'dataType': $state.params.dataType,
+						'action': 	$state.params.action,
+						'id': 		$state.params.id,
+						'page': 	page
+					});
+				}else{
+					$state.go('record-list', {
+						'dataType':	$state.params.dataType,
+						'page': 	page
+					});
+				}
 			};
 
 			$scope.getConfig();
