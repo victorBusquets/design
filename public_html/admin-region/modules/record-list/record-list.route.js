@@ -7,7 +7,7 @@
 			$stateProvider        
 				.state('record-list', {
 					parent: 'main',
-					url: '/list-:dataType/page-:page',
+					url: '/list-:dataType/page/:page',
 					templateUrl: 'modules/record-list/record-list.html',
 					controller: 'RecordListController'
 				});
